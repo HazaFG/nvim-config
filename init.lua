@@ -35,3 +35,12 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- Formatear al guardar con LSP (prettierd, entre otros)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.html", "*.css", "*.md" },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
