@@ -27,17 +27,32 @@ map("n", "<leader>cn", function()
   end)
 end, { desc = "Crear nueva carpeta" })
 
--- Crear nuevo archivo y abrir en nvim-tree
+-- Crear nuevo archivo y abrir en nvim-tree (con verificación)
 map("n", "<leader>fn", function()
   vim.ui.input({ prompt = "Ruta del archivo nuevo (ej. src/components/Form.tsx): " }, function(input)
-    if input then
-      vim.cmd("silent !mkdir -p " .. vim.fn.fnamemodify(input, ":h"))
-      vim.cmd("e " .. input)
-      vim.cmd("NvimTreeOpen")
-      require("nvim-tree.api").tree.find_file({ path = input, focus = true })
+    if input and input ~= "" then
+      local filepath = vim.fn.expand(input)
+      local dir = vim.fn.fnamemodify(filepath, ":h")
+
+      -- Verificar si el archivo ya existe
+      if vim.fn.filereadable(filepath) == 1 then
+        vim.ui.select({ "Sí", "No" }, { prompt = "El archivo ya existe. ¿Sobrescribir?" }, function(choice)
+          if choice == "Sí" then
+            vim.cmd("silent !mkdir -p " .. dir)
+            vim.cmd("e! " .. filepath) -- Forzar abrir el archivo existente
+            vim.cmd("NvimTreeOpen")
+            require("nvim-tree.api").tree.find_file({ path = filepath, focus = true })
+          end
+        end)
+      else
+        vim.cmd("silent !mkdir -p " .. dir)
+        vim.cmd("e " .. filepath)
+        vim.cmd("NvimTreeOpen")
+        require("nvim-tree.api").tree.find_file({ path = filepath, focus = true })
+      end
     end
   end)
-end, { desc = "Crear nuevo archivo" })
+end, { desc = "Crear nuevo archivo (con confirmación)" })
 
 
 -- Borrar una carpeta
@@ -51,5 +66,9 @@ map("n", "<leader>dc", function()
   end)
 end, { desc = "Borrar carpeta" })
 
+-- Comentar la línea actual
+map('n', '<C-/>', 'I--<Esc>', { desc = 'Comentar línea actual' })
+-- Comentar las líneas seleccionadas en modo visual
+map('v', '<C-/>', ':s/^/--/<CR>', { desc = 'Comentar líneas seleccionadas' })
 
 
