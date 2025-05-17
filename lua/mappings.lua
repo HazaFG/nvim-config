@@ -4,12 +4,13 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 
 
 map("i", "jk", "<ESC>")
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Find Files" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Find Files" })
 
 map({ 'v', 'n' }, '<C-c>', '"+y', { desc = 'Copy to clipboard' })
@@ -49,6 +50,31 @@ map("n", "<leader>dc", function()
     end
   end)
 end, { desc = "Borrar carpeta" })
+
+
+-- Borrar un archivo
+map("n", "<leader>df", function()
+  vim.ui.input({ prompt = "Ruta del archivo a borrar: " }, function(input)
+    if input then
+      vim.cmd("silent !rm " .. input)
+      print("🗑️ Archivo eliminado: " .. input)
+      vim.cmd("NvimTreeRefresh")
+    end
+  end)
+end, { desc = "Borrar archivo por ruta" })
+
+
+-- Borrar el archivo del buffer actual
+map("n", "<leader>dx", function()
+  local file = vim.fn.expand("%:p")
+  if vim.fn.confirm("¿Eliminar archivo actual?\n" .. file, "&Sí\n&No", 1) == 1 then
+    vim.cmd("silent !rm " .. file)
+    vim.cmd("bd!")  -- Cierra el buffer
+    print("🗑️ Archivo eliminado: " .. file)
+    vim.cmd("NvimTreeRefresh")
+  end
+end, { desc = "Borrar archivo actual" })
+
 
 -- Comentar la línea actual
 map('n', '<C-/>', 'I--<Esc>', { desc = 'Comentar línea actual' })
