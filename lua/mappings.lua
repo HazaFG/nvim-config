@@ -81,4 +81,5 @@ map('n', '<C-/>', 'I--<Esc>', { desc = 'Comentar línea actual' })
 -- Comentar las líneas seleccionadas en modo visual
 map('v', '<C-/>', ':s/^/--/<CR>', { desc = 'Comentar líneas seleccionadas' })
 
+map('n', '<leader>sw', '<cmd>Telescope grep_string<CR>', { desc = 'Buscar palabra bajo el cursor' })
 
