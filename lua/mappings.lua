@@ -83,3 +83,5 @@ map('v', '<C-/>', ':s/^/--/<CR>', { desc = 'Comentar líneas seleccionadas' })
 
 map('n', '<leader>sw', '<cmd>Telescope grep_string<CR>', { desc = 'Buscar palabra bajo el cursor' })
 
+map('n', '<leader>sg', '<cmd>Telescope live_grep<CR>', { desc = 'Búsqueda global en el proyecto' })
+
