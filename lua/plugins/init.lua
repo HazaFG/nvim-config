@@ -41,9 +41,6 @@ return {
         "vim", "lua", "vimdoc",
         "html", "css", "javascript", "typescript", "tsx", "jsx"
       },
-      autotag = {
-        enable = true,
-      },
     },
   },
 }
