@@ -1,5 +1,5 @@
 return {
-  {
+{
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
@@ -11,6 +11,8 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+  "tpope/vim-commentary", 
 
   {
     "windwp/nvim-ts-autotag",
