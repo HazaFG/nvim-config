@@ -1,7 +1,6 @@
 return {
-{
+  {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -12,7 +11,7 @@ return {
     end,
   },
 
-  "tpope/vim-commentary", 
+  "tpope/vim-commentary",
 
   {
     "windwp/nvim-ts-autotag",
@@ -45,6 +44,12 @@ return {
       },
     },
   },
+
+  {
+    "L3MON4D3/LuaSnip",
+    config = function()
+      require("configs.luasnip")
+    end,
+  },
 }
 
-        

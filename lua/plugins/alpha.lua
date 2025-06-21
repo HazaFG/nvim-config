@@ -40,7 +40,7 @@ dashboard.section.header.val = {
 
 
       -- Sobrescribe el highlight "Type" para el header de Alpha
-      vim.api.nvim_set_hl(0, "Type", { fg = "#fcc96a", bg = "none" }) -- Ejemplo con color naranja de Gruvbo
+      vim.api.nvim_set_hl(0, "Type", { fg = "#169ac9", bg = "none" }) -- Ejemplo con color naranja de Gruvbo
       --vim.api.nvim_set_hl(0, "Normal", { fg = "#ff6c5c", bg = "none" }) -- Ejemplo con un color claro de Gruvbox para el texto normal
 
       -- Disable folding on alpha buffer, agrego esto para ver si mi repam funciona, wow, si jalo
