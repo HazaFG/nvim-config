@@ -1,5 +1,9 @@
 return {
   {
+    "pantharshit00/vim-prisma",
+    ft = "prisma",
+  },
+  {
     "stevearc/conform.nvim",
     opts = require "configs.conform",
   },

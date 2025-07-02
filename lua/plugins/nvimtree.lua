@@ -2,7 +2,7 @@ return {
   "nvim-tree/nvim-tree.lua",
   opts = {
     view = {
-      side = "left"
+      side = "right"
     },
     filters = {
       dotfiles = false,       -- Mostrar archivos ocultos (.gitignore, .env, etc.)
